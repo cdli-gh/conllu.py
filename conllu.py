@@ -215,10 +215,11 @@ class Element(object):
             # Multi-word token, maps to: Textbound with a special type,
             # and free-text comment containing the form.
             # Span corresponds to maximum span over covered tokens.
+            print(self.id)
             start, end = self.id.split('-')
             first, last = element_by_id[start], element_by_id[end]
             spans = [[first.offset, last.offset+len(last.form)]]
-            text  = ' '.join(str(element_by_id[str(t)].form)
+            text = ' '.join(str(element_by_id[str(t)].form)
                               for t in range(int(start), int(end)+1))
             return [
                 brat.Textbound('T'+bid, 'Multiword-token', spans, text),

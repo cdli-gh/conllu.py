@@ -4,7 +4,7 @@
 
 import sys
 
-from conllu import conllu
+import conllu
 
 def main(argv):
     # process sentence at a time

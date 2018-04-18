@@ -58,6 +58,6 @@ if __name__ == '__main__':
    # my_file_list.append(my_file_lines)
    output_file = open("output.ann", "wt")
    output_text = open("output.txt", "wt")
-   convert(open((raw_input("file path: "))))
+   convert(open((sys.argv[1])))
    # output_file.close()
    # print("hi")
