@@ -8,6 +8,7 @@ from convert import convert
 def file_process(conllUFile, verbose=False):
     try:
         convert(conllUFile, "output")
+        click.echo('\nInfo: Correctly processed {0}.'.format(conllUFile))
     except Exception:
         click.echo('\nError: Error in processing {0}.'.format(conllUFile))
 
