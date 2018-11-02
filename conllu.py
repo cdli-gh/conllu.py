@@ -97,6 +97,13 @@ class Element(object):
         except ValueError:
             return False
 
+    def is_cdli_word(self):
+        sid = str(self.id)
+        if not(sid.__contains__("-")) and sid.__contains__("."):
+            return True
+        else:
+            return False
+
     def has_feat(self, name):
         return name in self.feat_map()
 
@@ -175,7 +182,7 @@ class Element(object):
         """Return list of brat standoff annotations for the element."""
         # base ID, unique within the document
         bid = '%s.%s' % (self.sentence.id, self.id)
-        if self.is_word():
+        if self.is_word() or self.is_cdli_word():
             # Word, maps to: Textbound with the coarse POS tag as
             # type, freeform text comment with LEMMA, POSTAG and
             # MISC (when nonempty) as values, attribute for each
@@ -204,7 +211,7 @@ class Element(object):
             # relations
             relations = []
             for head, deprel in self.deps(include_primary=True):
-                if head == '0':
+                if head == '0' or head == '_':
                     continue # skip root
                 rid = 'R'+bid+'-%d'%(len(relations)+1)
                 tid = '%s.%s' % (self.sentence.id, element_by_id[head].id)
