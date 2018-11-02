@@ -35,9 +35,9 @@ def output_document(document, options=None):
         annfn = os.path.join(options, basefn+'.ann')
         if not os.path.exists(options):
             os.makedirs(options)
-        with codecs.open(txtfn, 'wt+', encoding='utf-8') as txtout:
+        with codecs.open(txtfn, 'wt', encoding='utf-8') as txtout:
             output_document_text(document, txtout, options)
-        with codecs.open(annfn, 'wt+', encoding='utf-8') as annout:
+        with codecs.open(annfn, 'wt', encoding='utf-8') as annout:
             output_document_annotations(document, annout, options)
 
 def convert(source, options=None):
