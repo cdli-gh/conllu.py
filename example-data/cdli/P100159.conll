@@ -1,0 +1,18 @@
+#new_text=P100159
+#ID	FORM	LEMMA	UPOSTAG	XPOSTAG	FEATS	HEAD	DEPREL	DEPS	MISC
+o.1.1	1(disz)	1(disz)[one]	NUM	NU	_	_	_	_	_
+o.1.2	gu4	gud[ox]	NOUN	N	Number=Sing	_	_	_	_
+o.1.3	niga	niga[fattened]	VERB	V	_	niga[fattened][-a][-ak]	V.SUB.GEN	_	_
+o.2.1	ki	ki[place]	NOUN	N	Number=Sing	_	_	_	_
+o.2.2	ur-{d}ba-ba6-ta	Urbaba[1]	PROPN	PN	Case=Gen,Abl|Animacy=Hum|Number=Sing	_	_	_	_
+o.3.1	gu-za-ni	Guzani[1]	PROPN	PN	Case=Erg|Animacy=Hum|Number=Sing	_	_	_	_
+o.3.2	i3-dab5	n]	VERB	V	Person=3|Number=Sing|Verb Form=Fin	i[-n]-dab[seize][-ø]	FIN.3-SG-H-A.V.ABS	_	_
+o.4.1	kiszib3	kiszib[seal]	NOUN	N	Number=Sing	kiszib[seal]	N	_	_
+o.4.2	ur-{d}ba-ba6	Urbaba[1]	PROPN	PN	Animacy=Hum|Number=Sing	_	_	_	_
+o.4.3	dumu	dumu[child]	NOUN	N	Number=Sing	_	_	_	_
+o.4.4	x-...	_[_]	_	_	_	_	_	_	_
+r.1.1	...	_[_]	_	_	_	_	_	_	_
+r.4.1	mu	mu[year]	NOUN	N	Number=Sing	mu[name]	N	_	mu[year]
+r.4.2	puzur4-isz-{d}da-gan	Puzuriszdagan[1]	PROPN	SN	Number=Sing	_	_	_	_
+r.4.3	ba-du3	du[build]	VERB	V	Person=3|Voice=Mid|Number=Sing	ba-du[build][-ø][-a][-'a]	MID.V.3-SG-S.SUB.L1	_	_
+

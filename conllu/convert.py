@@ -3,7 +3,6 @@
 # Convert to and from CoNLL-U format.
 
 import os
-import sys
 import codecs
 
 # from conllu import *
@@ -26,17 +25,19 @@ def output_document_annotations(document, output, options=None):
 
 def output_document(document, options=None):
     """Output given document according to given options."""
-    if options is None or options.output is None:
+    if options is None:
         # If no output directory is specified, output both to stdout
         output_document_text(document, output_text, options)
         output_document_annotations(document, output_file, options)
     else:
         basefn = os.path.splitext(os.path.basename(document.filename))[0]
-        txtfn = os.path.join(options.output, basefn+'.txt')
-        annfn = os.path.join(options.output, basefn+'.ann')
-        with codecs.open(txtfn, 'wt', encoding='utf-8') as txtout:
+        txtfn = os.path.join(options, basefn+'.txt')
+        annfn = os.path.join(options, basefn+'.ann')
+        if not os.path.exists(options):
+            os.makedirs(options)
+        with codecs.open(txtfn, 'wt+', encoding='utf-8') as txtout:
             output_document_text(document, txtout, options)
-        with codecs.open(annfn, 'wt', encoding='utf-8') as annout:
+        with codecs.open(annfn, 'wt+', encoding='utf-8') as annout:
             output_document_annotations(document, annout, options)
 
 def convert(source, options=None):

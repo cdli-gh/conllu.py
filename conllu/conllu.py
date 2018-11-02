@@ -190,7 +190,7 @@ class Element(object):
             # textbounds
             spans = [[self.offset, self.offset+len(self.form)]]
             textbounds = [
-                brat.Textbound('T'+bid, self.cpostag, spans, self.form),
+                brat.Textbound('T' + bid, self.cpostag, spans, self.form),
             ]
             # comments
             freeform = [
@@ -200,14 +200,14 @@ class Element(object):
             if self.misc != '_':
                 freeform.append(('MISC', self.misc))
             comments = [
-                brat.Comment('#'+bid, COMMENT_TYPE, 'T'+bid,
+                brat.Comment('#' + bid, COMMENT_TYPE, 'T' + bid,
                              ' '.join(u'%s=%s' % f for f in freeform))
             ]
             # attributes
             attribs = []
             for name, value in self.feats():
                 aid = 'A'+bid+'-%d'%(len(attribs)+1)
-                attribs.append(brat.Attribute(aid, name, 'T'+bid, value))
+                attribs.append(brat.Attribute(aid, name, 'T' + bid, value))
             # relations
             relations = []
             for head, deprel in self.deps(include_primary=True):
@@ -228,8 +228,8 @@ class Element(object):
             text  = ' '.join(str(element_by_id[str(t)].form)
                               for t in range(int(start), int(end)+1))
             return [
-                brat.Textbound('T'+bid, 'Multiword-token', spans, text),
-                brat.Comment('#'+bid, COMMENT_TYPE, 'T'+bid, 'FORM='+self.form)
+                brat.Textbound('T' + bid, 'Multiword-token', spans, text),
+                brat.Comment('#' + bid, COMMENT_TYPE, 'T' + bid, 'FORM=' + self.form)
             ]
 
     def __unicode__(self):

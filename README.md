@@ -11,3 +11,7 @@ Original code Copyright (c) 2014 Sampo Pyysalo and distributed under the MIT lic
 
 ## Operation
 Fed a conllu file, this script will output a .txt file containing the unannotated text and a .ann file, containing the brat standoff format annotations. Both files have the same filename so they just need to be put in a subfolder of the brat data folder to render properly.
+
+'''
+ conllu2brat -i example-data/cdli
+'''
