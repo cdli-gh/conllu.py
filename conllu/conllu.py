@@ -17,22 +17,25 @@ DSEP = ':'
 # Free-form text annotation type in brat export
 COMMENT_TYPE = 'AnnotatorNotes'
 
+
 class FormatError(Exception):
     def __init__(self, msg, line=None, linenum=None):
         self.msg = msg
         self.line = line
         self.linenum = linenum
 
-    def __str__(self):        
+    def __str__(self):
         msg = self.msg
         if self.line is not None:
-            msg += ': "'+self.line.encode('ascii', 'replace')+'"'
+            msg += ': "' + self.line.encode('ascii', 'replace') + '"'
         if self.linenum is not None:
             msg += ' (line %d)' % self.linenum
         return msg
 
+
 CPOSTAG_RE = re.compile(r'^[a-zA-Z]+$')
 POSTAG_RE = re.compile(r'^[\x20-\xff]+$')
+
 
 class Element(object):
     """Represents CoNLL-U word or multi-word token."""
@@ -99,7 +102,7 @@ class Element(object):
 
     def is_cdli_word(self):
         sid = str(self.id)
-        if not(sid.__contains__("-")) and sid.__contains__("."):
+        if not (sid.__contains__("-")) and sid.__contains__("."):
             return True
         else:
             return False
@@ -188,7 +191,7 @@ class Element(object):
             # MISC (when nonempty) as values, attribute for each
             # feature.
             # textbounds
-            spans = [[self.offset, self.offset+len(self.form)]]
+            spans = [[self.offset, self.offset + len(self.form)]]
             textbounds = [
                 brat.Textbound('T' + bid, self.cpostag, spans, self.form),
             ]
@@ -206,16 +209,16 @@ class Element(object):
             # attributes
             attribs = []
             for name, value in self.feats():
-                aid = 'A'+bid+'-%d'%(len(attribs)+1)
+                aid = 'A' + bid + '-%d' % (len(attribs) + 1)
                 attribs.append(brat.Attribute(aid, name, 'T' + bid, value))
             # relations
             relations = []
             for head, deprel in self.deps(include_primary=True):
                 if head == '0' or head == '_':
-                    continue # skip root
-                rid = 'R'+bid+'-%d'%(len(relations)+1)
+                    continue  # skip root
+                rid = 'R' + bid + '-%d' % (len(relations) + 1)
                 tid = '%s.%s' % (self.sentence.id, element_by_id[head].id)
-                args = [('Arg1', 'T'+tid), ('Arg2', 'T'+bid)]
+                args = [('Arg1', 'T' + tid), ('Arg2', 'T' + bid)]
                 relations.append(brat.Relation(rid, deprel, args))
             return textbounds + attribs + relations + comments
         else:
@@ -224,19 +227,19 @@ class Element(object):
             # Span corresponds to maximum span over covered tokens.
             start, end = self.id.split('-')
             first, last = element_by_id[start], element_by_id[end]
-            spans = [[first.offset, last.offset+len(last.form)]]
-            text  = ' '.join(str(element_by_id[str(t)].form)
-                              for t in range(int(start), int(end)+1))
+            spans = [[first.offset, last.offset + len(last.form)]]
+            text = ' '.join(str(element_by_id[str(t)].form)
+                            for t in range(int(start), int(end) + 1))
             return [
                 brat.Textbound('T' + bid, 'Multiword-token', spans, text),
                 brat.Comment('#' + bid, COMMENT_TYPE, 'T' + bid, 'FORM=' + self.form)
             ]
 
     def __unicode__(self):
-        fields = [self.id, self.form, self.lemma, self.cpostag, self.postag, 
+        fields = [self.id, self.form, self.lemma, self.cpostag, self.postag,
                   self._feats, self.head, self.deprel, self._deps, self.misc]
-        fields[5] = '_' if fields[5] == [] else '|'.join(sorted(fields[5], key=lambda s: s.lower())) # feats
-        fields[8] = '_' if fields[8] == [] else '|'.join(fields[8]) # deps
+        fields[5] = '_' if fields[5] == [] else '|'.join(sorted(fields[5], key=lambda s: s.lower()))  # feats
+        fields[8] = '_' if fields[8] == [] else '|'.join(fields[8])  # deps
         return '\t'.join(fields)
 
     @classmethod
@@ -244,9 +247,10 @@ class Element(object):
         fields = s.split('\t')
         if len(fields) != 10:
             raise FormatError('got %d/10 field(s)' % len(fields), s)
-        fields[5] = [] if fields[5] == '_' else fields[5].split('|') # feats
-        fields[8] = [] if fields[8] == '_' else fields[8].split('|') # deps
+        fields[5] = [] if fields[5] == '_' else fields[5].split('|')  # feats
+        fields[8] = [] if fields[8] == '_' else fields[8].split('|')  # deps
         return cls(*fields)
+
 
 class Sentence(object):
     def __init__(self, id_=0, filename=None, base_offset=0):
@@ -295,7 +299,7 @@ class Sentence(object):
     def element_by_id(self):
         """Return mapping from id to element."""
         if self._element_by_id is None:
-            self._element_by_id = { e.id: e for e in self._elements }
+            self._element_by_id = {e.id: e for e in self._elements}
         return self._element_by_id
 
     def get_element(self, id_):
@@ -323,9 +327,9 @@ class Sentence(object):
         self._element_by_id = None
 
         # update IDs
-        id_map = { u'0' : u'0' }
+        id_map = {u'0': u'0'}
         for i, w in enumerate(self.words()):
-            new_id = unicode(i+1)
+            new_id = unicode(i + 1)
             id_map[w.id] = new_id
             w.id = new_id
         for w in self.words():
@@ -373,7 +377,8 @@ class Sentence(object):
 
     def __unicode__(self):
         element_unicode = [unicode(e) for e in self._elements]
-        return '\n'.join(self.comments + element_unicode)+'\n'
+        return '\n'.join(self.comments + element_unicode) + '\n'
+
 
 class Document(object):
     def __init__(self, filename=None):
@@ -407,6 +412,7 @@ class Document(object):
             annotations.extend(sentence.to_brat_standoff())
         return annotations
 
+
 def _file_name(file_like, default='document'):
     """Return name of named file or file-like object, or default if not
     available."""
@@ -418,6 +424,7 @@ def _file_name(file_like, default='document'):
     except AttributeError:
         return default
 
+
 def read_documents(source, filename=None):
     """Read CoNLL-U format, yielding Document objects."""
 
@@ -428,6 +435,7 @@ def read_documents(source, filename=None):
         # TODO: recognize and respect document boundaries in source data.
         current.append(sentence)
     yield current
+
 
 def read_conllu(source, filename=None):
     """Read CoNLL-U format, yielding Sentence objects.
@@ -453,7 +461,7 @@ def read_conllu(source, filename=None):
                 offset += current.length() + 1
                 yield current
             else:
-                raise FormatError('empty sentence', line, ln+1)
+                raise FormatError('empty sentence', line, ln + 1)
             sent_num += 1
             current = Sentence(sent_num, filename, offset)
         elif line[0] == '#':
@@ -462,6 +470,6 @@ def read_conllu(source, filename=None):
             try:
                 current.append(Element.from_string(line))
             except FormatError, e:
-                e.linenum = ln+1
+                e.linenum = ln + 1
                 raise e
     assert current.empty(), 'missing terminating whitespace'

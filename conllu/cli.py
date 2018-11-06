@@ -7,7 +7,12 @@ from convert import convert
 
 def file_process(conllUFile, verbose=False):
     try:
-        convert(conllUFile, "output")
+        options = "output"
+        convert(conllUFile, options)
+        if verbose:
+            basefn = os.path.splitext(os.path.basename(conllUFile))[0]
+            annfn = os.path.join(options, basefn + '.ann')
+            click.echo('\nInfo: Writing into {0}.'.format(annfn))
         click.echo('\nInfo: Correctly processed {0}.'.format(conllUFile))
     except Exception:
         click.echo('\nError: Error in processing {0}.'.format(conllUFile))
@@ -16,7 +21,7 @@ def file_process(conllUFile, verbose=False):
 def check_and_process(pathname, verbose=False):
     mode = os.stat(pathname)[ST_MODE]
 
-    if S_ISREG(mode) and pathname.lower().endswith('.conll'):
+    if S_ISREG(mode) and (pathname.lower().endswith('.conll') or pathname.lower().endswith('.conllu')):
         # It's a file, call the callback function
         if verbose:
             click.echo('\nInfo: Processing {0}.'.format(pathname))
