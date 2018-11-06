@@ -1,13 +1,13 @@
 T1.o.1.1	NUM 0 7	1(disz)
 #1.o.1.1	AnnotatorNotes T1.o.1.1	LEMMA=1(disz)[one] POSTAG=NU
-T1.o.1.2	_ 0 10	dumu-nita2
+T1.o.1.2	_ 8 18	dumu-nita2
 #1.o.1.2	AnnotatorNotes T1.o.1.2	LEMMA=_ POSTAG=_
-T1.o.1.3	NOUN 0 4	gaba
+T1.o.1.3	NOUN 19 23	gaba
 A1.o.1.3-1	Number T1.o.1.3 Sing
 #1.o.1.3	AnnotatorNotes T1.o.1.3	LEMMA=gaba[chest] POSTAG=N
-T1.o.2.1	_ 0 12	lugal-i3-di3
+T1.o.2.1	_ 24 36	lugal-i3-di3
 #1.o.2.1	AnnotatorNotes T1.o.2.1	LEMMA=_ POSTAG=_
-T1.o.2.2	_ 0 1	x
+T1.o.2.2	_ 37 38	x
 #1.o.2.2	AnnotatorNotes T1.o.2.2	LEMMA=_ POSTAG=_
-T1.o.2.3	_ 0 1	x
+T1.o.2.3	_ 39 40	x
 #1.o.2.3	AnnotatorNotes T1.o.2.3	LEMMA=_ POSTAG=_

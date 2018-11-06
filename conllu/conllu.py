@@ -56,7 +56,7 @@ class Element(object):
         self.offset = offset
         self.sentence = None
 
-        self.validate()
+        #self.validate()
 
         self._fmap = None
         self._dlist = None
@@ -94,6 +94,9 @@ class Element(object):
             raise FormatError('non-int head: %s' % self.head)
 
     def is_word(self):
+        return self.is_int() or self.is_cdli_word()
+
+    def is_int(self):
         try:
             val = int(self.id)
             return True

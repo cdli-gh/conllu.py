@@ -4,7 +4,7 @@ dependencies = ['click']
 
 setup(
     name='conllu.py',
-    version='0.0.2',
+    version='0.0.3',
     url='https://github.com/cdli-gh/conllu.py',
     license='BSD',
     author='Jayanth',
