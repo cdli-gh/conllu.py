@@ -19,7 +19,7 @@ Fed a conllu file, this script will output a .txt file containing the unannotate
 ## Description
 This tool converts a CoNLL-U file to Brat format.
 
-More information on the CONLL-U file format can be found [here] (http://universaldependencies.org/format.html).
+More information on the CONLL-U file format can be found [here](http://universaldependencies.org/format.html).
 
 More information on the brat standoff format can be found [here](http://brat.nlplab.org/standoff.html).
 
